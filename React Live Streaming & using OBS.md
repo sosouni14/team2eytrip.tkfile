@@ -49,7 +49,13 @@ componentDidMount() {
 
 > 방 생성 
 
-[1]: https://feel5ny.github.io/2017/12/23/log_002/	"참조"
+[1]: https://feel5ny.github.io/2017/12/23/log_002/	"https://feel5ny.github.io/2017/12/23/log_002/"
+
+
+
+2
+
+
 
 
 
