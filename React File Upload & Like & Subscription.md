@@ -111,4 +111,78 @@
 
 
 
-### 
+### 1. Components>VideoDetail.js
+
+```java
+function VideoDetailPage(props) {
+  const videoId = props.match.params.videoId;
+  const variable = { videoId: videoId };
+```
+
+
+
+> 랜딩페이지에 있는 ```videoId```를 ```props```로 불러와서 사용하기 위한 정의
+
+---
+
+```java
+#VideoDetail.js 
+useEffect(() => {
+    Axios.post('/api/video/getVideoDetail', variable).then((response) => {
+      if (response.data.success) {
+        console.log(response.data);
+        setVideoDetail(response.data.videoDetail);
+      } else {
+        alert('비디오 정보를 가져오길 실패했습니다.');
+      }
+    });
+  }, []);
+```
+
+> ```Axios```를 이용하여 ```post ```로 서버```/getVideoDetail```에 있는 ```db``` 에서 비디오 정보를 ```response```를 보내서 받아온다
+
+---
+
+```java
+#VideoDetail.js
+if (VideoDetail.writer) {
+    const subscribeButton = VideoDetail.writer._id !==
+      localStorage.getItem('userId') && (
+      <Subscribe
+        userTo={VideoDetail.writer._id}
+        userFrom={localStorage.getItem('userId')}
+      /> 
+```
+
+> 페이지의 동영상이 업로드한 사람이 볼때 구독 버튼이 안보이게 ```userId```를 비교해서 구독 버튼이 사라지게 만들어준다.
+
+---
+
+```java
+#VideoDeatil.js
+return (
+      <Row gutter={(16, 16)}>
+        <Col lg={18} xs={24}>
+          <div style={{ width: '100%', padding: '3rem 4rem' }}>
+            <video
+              style={{ width: '100%' }}
+              src={`http://localhost:5000/${VideoDetail.filePath}`}
+              controls
+            />
+```
+
+> 동영상의 스타일을 정의 해주면서 동영상의 ```filePath```를 정의 해주는 부분이다.
+
+```java
+<List.Item actions={[<Subscribe userTo={VideoDetail.writer._id} userFrom={localStorage.getItem('userId')}/>,]} >
+              <List.Item.Meta
+                avatar={<Avatar src={VideoDetail.writer.image} />}
+                title={VideoDetail.writer.name}
+                description={VideoDetail.description}
+              />
+            </List.Item>
+```
+
+> 구독 버튼이 활성화 될때 구독을 눌르면  ```userId```키를 ```localStorage.getItem```를 사용해 전달해준다. 
+
+> 각 ```thumbnails, title, description```을 정의 해주는 부분이다.
